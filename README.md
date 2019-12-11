@@ -12,13 +12,14 @@ version: '3.7'
 
 services:
 
-  redis:
-    image: 'redis:5.0.5'
-    command: redis-server --requirepass devpassword
-    volumes:
-      - 'redis:/var/lib/redis/data'
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:management
+    env_file:
+      - '.env'
     ports:
-      - '6379:6379'
+      - "5673:5672"
+      - "15672:15672"
 
   website:
     build: .
@@ -41,11 +42,11 @@ services:
       - '.env'
     volumes:
       - '.:/flask_celery_redis'
-
+      
   flower:
     image: mher/flower
     environment:
-      - CELERY_BROKER_URL=redis://:devpassword@redis:6379/0
+      - CELERY_BROKER_URL=amqp://rabbitmq:rabbitmq@rabbit:5672/
       - FLOWER_PORT=5555
     ports:
       - 5555:5555
@@ -60,7 +61,9 @@ volumes:
 2. CD into the root of the project
 3. Create a .env file with the following env variables. Place it in the root directory (same level as docker-compose.yaml).
    ```
-   COMPOSE_PROJECT_NAME=flask_celery_redis
+   RABBITMQ_DEFAULT_USER=rabbitmq
+   RABBITMQ_DEFAULT_PASS=rabbitmq
+   COMPOSE_PROJECT_NAME=flask_celery_rabbitmq
    PYTHONUNBUFFERED=true
    ```
 4. Build the containers
@@ -69,7 +72,7 @@ volumes:
    ```
    
 ## Website
-![Website](https://quantmill.s3.eu-west-2.amazonaws.com/github/flask.PNGG)
+![Website](https://quantmill.s3.eu-west-2.amazonaws.com/github/flask.PNG)
 
 ## RabbitMQ
 ![RabbitMQ](https://quantmill.s3.eu-west-2.amazonaws.com/github/rabbitmq.PNG)
