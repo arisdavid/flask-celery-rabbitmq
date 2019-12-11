@@ -1,6 +1,6 @@
 FROM python:3.6
 
-ENV INSTALL_PATH /flask_celery_redis
+ENV INSTALL_PATH /flask_celery_rabbitmq
 RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH

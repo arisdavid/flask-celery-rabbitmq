@@ -21,7 +21,7 @@ services:
     env_file:
       - '.env'
     volumes:
-      - '.:/flask_celery_redis'
+      - '.:/flask_celery_rabbitmq'
     ports:
       - '8000:8000'
 
@@ -31,7 +31,7 @@ services:
     env_file:
       - '.env'
     volumes:
-      - '.:/flask_celery_redis'
+      - '.:/flask_celery_rabbitmq'
       
   flower:
     image: mher/flower
