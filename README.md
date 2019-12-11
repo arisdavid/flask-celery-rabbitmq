@@ -1,8 +1,8 @@
 # flask-celery-redis
-Example Flask, Celery, Flower and Redis services with Docker
+Example Flask, Celery, Flower and RabbitMQ services
 
 docker-compose.yml file split into the following services
-- redis
+- rabbimq
 - website
 - celery
 - flower
