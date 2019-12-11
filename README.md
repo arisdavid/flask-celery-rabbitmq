@@ -68,9 +68,14 @@ volumes:
    docker-compose up --build
    ```
    
-## Sample Screenshot 
-![Flask-Celery-Redis](https://quantmill.s3.eu-west-2.amazonaws.com/github/flask-celery-redis.PNG)
+## Website
+![Website](https://quantmill.s3.eu-west-2.amazonaws.com/github/flask.PNGG)
 
-## Flower to monitor celery events
+## RabbitMQ
+![RabbitMQ](https://quantmill.s3.eu-west-2.amazonaws.com/github/rabbitmq.PNG)
+
+## Flower
 ![Flower](https://quantmill.s3.eu-west-2.amazonaws.com/github/flower.PNG)
+
+
 
