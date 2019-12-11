@@ -2,13 +2,14 @@ version: '3.7'
 
 services:
 
-  redis:
-    image: 'redis:5.0.5'
-    command: redis-server --requirepass devpassword
-    volumes:
-      - 'redis:/var/lib/redis/data'
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:management
+    env_file:
+      - '.env'
     ports:
-      - '6379:6379'
+      - "5673:5672"
+      - "15672:15672"
 
   website:
     build: .
@@ -35,7 +36,7 @@ services:
   flower:
     image: mher/flower
     environment:
-      - CELERY_BROKER_URL=redis://:devpassword@redis:6379/0
+      - CELERY_BROKER_URL=amqp://rabbitmq:rabbitmq@rabbit:5672/
       - FLOWER_PORT=5555
     ports:
       - 5555:5555
